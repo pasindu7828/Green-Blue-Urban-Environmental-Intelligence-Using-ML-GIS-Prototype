@@ -1,0 +1,18 @@
+import { ArrowDown, Brain, Database, Grid3X3, LineChart, Map, Route, ShieldCheck, SlidersHorizontal, Target, Thermometer, TrendingUp } from 'lucide-react'
+
+const steps=[
+  {icon:Database,title:'1. Data acquisition',text:'Landsat 8/9 thermal + optical data, JRC water, OSM roads/buildings, VIIRS nighttime lights and LCZ for the official Kaduwela boundary.'},
+  {icon:Thermometer,title:'2. Feature extraction',text:'LST, NDVI, NDBI, NDWI, EVI, Albedo, green fraction and GIS-derived urban-form/distance features.'},
+  {icon:Grid3X3,title:'3. 210 m grid aggregation',text:'Pixel-level values are summarized to 2,194 planning grid cells. NDVI_ADJ and NDBI_ADJ capture neighborhood context.'},
+  {icon:Map,title:'4. Spatial validation',text:'Moran’s I is used to test spatial autocorrelation; spatial train/test splitting is used to reduce leakage between nearby correlated cells.'},
+  {icon:LineChart,title:'5. Historical trend classification',text:'2015–2025 LST histories are assessed with Mann–Kendall. Final five-class rules combine trend evidence with heat status.'},
+  {icon:Target,title:'6. ML benchmarking',text:'Random Forest, XGBoost, LightGBM and NGBoost are compared using R², RMSE and MAE with spatial and held-out-year validation.'},
+  {icon:Brain,title:'7. Explainability',text:'SHAP explains model predictions overall, by heat-trend class, and across selected years for temporal driver tracking.'},
+  {icon:TrendingUp,title:'8. Forecasting',text:'Future predictor conditions and LST are projected to target years such as 2029/2033. Forecast uncertainty and sequential error are reported.'},
+  {icon:SlidersHorizontal,title:'9. Real-grid scenario testing',text:'A planner selects a real grid cell, perturbs planning-relevant features, and re-queries the trained model. Final NGBoost output provides a predictive distribution.'},
+  {icon:Route,title:'10. Cooling priority',text:'Current severity, trend urgency, vegetation deficit and scenario-derived intervention potential feed a re-runnable priority ranking / optional CAPI.'},
+]
+
+export default function HeatMethodology(){
+ return <div><div className="mb-5"><h1 className="text-[24px] font-bold">Heat Methodology</h1><p className="text-[11px] text-slate-500">How the KaduwelaHeat-XAI research pipeline connects from satellite data to cooling-priority decisions</p></div><div className="data-note mb-5"><b>Research prototype:</b> this page represents the planned/implemented methodology architecture. Demo values elsewhere in the prototype are not final validated research results.</div><div className="grid gap-4 lg:grid-cols-2">{steps.map(({icon:Icon,title,text},i)=><div key={title} className="card-pad"><div className="flex items-start gap-3"><div className="rounded-xl bg-teal-50 p-2 text-teal-700"><Icon size={18}/></div><div><h2 className="section-title">{title}</h2><p className="mt-2 text-[11px] leading-5 text-slate-600">{text}</p></div></div>{i<steps.length-1&&<div className="mt-3 flex justify-center text-slate-300 lg:hidden"><ArrowDown size={16}/></div>}</div>)}</div><div className="mt-5 rounded-2xl border border-teal-200 bg-teal-50/60 p-5"><div className="flex gap-3"><ShieldCheck size={20} className="mt-0.5 text-teal-700"/><div><h2 className="section-title">Core novelty connection</h2><p className="mt-2 text-[11px] leading-5 text-slate-700">The contribution is not that LST retrieval, SHAP, forecasting or scenario testing are individually new. The research integrates <b>trend-aware explanation → future forecasting → real-grid what-if simulation with uncertainty → dynamic cooling-priority ranking</b> into one planning-oriented workflow for Kaduwela.</p></div></div></div></div>
+}

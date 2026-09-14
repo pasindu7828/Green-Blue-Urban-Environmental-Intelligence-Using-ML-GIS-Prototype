@@ -1,0 +1,13 @@
+Green-Blue UEI Unified Prototype — Generation Quality Check
+Date: 2026-08-18
+
+1) JSX/JS parse check: PASS (TypeScript JSX parser, noResolve)
+2) Local import resolution: PASS
+3) Heat zones: 2194
+4) Heat historical rows: 24134
+5) High cooling-priority zones: 187
+6) Locality search names: 20
+7) River risk demo distribution: Low 1 / Medium 2 / High 3 / Very High 2
+8) Backend/APIs: none; mock/local data only
+
+Note: npm install could not complete within the sandbox execution timeout. Run npm install && npm run build locally.
